@@ -16,8 +16,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar)
+//        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
+//        setSupportActionBar(toolbar)
 
         // Initializing the variable for image button
         abcImageButton = findViewById(R.id.imageButton)
