@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginPage">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="196dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="20dp"
+            android:text="Login "
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="82dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/brand"
+        android:layout_marginTop="90dp"
+        android:text="PetWatch"
+        android:textSize="30dp"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.564"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/email"
+        android:layout_below="@+id/brand"
+        android:hint="Email"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/baseline_email_24"
+        android:drawablePadding="10dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/password"
+        android:layout_below="@+id/email"
+        android:hint="Password"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/baseline_password_24"
+        android:drawablePadding="10dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn"
+        android:layout_below="@+id/password"
+        android:text="LOGIN"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/Regbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/btn"
+        android:gravity="center"
+        android:text="REGISTER" />
+
+
+</RelativeLayout>
