@@ -1,6 +1,6 @@
 package com.example.fyp_tommadden
 
-import android.R
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -21,11 +21,11 @@ class RegisterPage : AppCompatActivity() {
                 val i = Intent(applicationContext, LoginPage::class.java)
                 startActivity(i)
             }
-        }
+        })
 
 // set on-click listener
-       regbutton.setOnClickListener {
-            Toast.makeText(this@RegisterPage, "You clicked me.", Toast.LENGTH_SHORT).show()
-        }
+//       regbutton.setOnClickListener {
+//            Toast.makeText(this@RegisterPage, "You clicked me.", Toast.LENGTH_SHORT).show()
+//        }
     }
 }
