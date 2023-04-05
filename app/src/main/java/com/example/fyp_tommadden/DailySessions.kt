@@ -11,6 +11,8 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.firebase.database.*
 import java.text.SimpleDateFormat
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -21,7 +23,7 @@ class DailySessions : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_daily_sessions)
 
         // Step 2: Create a reference to the Firebase database
         databaseRef = FirebaseDatabase.getInstance().getReference("Timer")
@@ -35,10 +37,9 @@ class DailySessions : AppCompatActivity() {
                     val date = data.key
                     val value = data.child("finalTimer").value.toString()
                     if (date != null) {
-                        val dateFormat = SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.getDefault())
-                        val dateObj = dateFormat.parse(date)
-                        val timestamp = dateObj.time
-                        dataList.add(Entry(timestamp.toFloat(),value.toFloat()))
+                        val formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss z yyyy", Locale.getDefault())
+                        val test = ZonedDateTime.parse(date, formatter)
+                        dataList.add(Entry(test.toInstant().epochSecond.toFloat(),value.toFloat()))
                     }
                 }
 

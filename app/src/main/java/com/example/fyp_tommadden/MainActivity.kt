@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, R.string.stopped, Toast.LENGTH_SHORT).show()
 
                     db = FirebaseDatabase.getInstance().getReference("Timer")
-                    val timer = Timer(finalTimer, Date) // pass data to the user class
+                    val timer = Timer(timerResult, Date) // pass data to the user class
 
                     db.child(Date).setValue(timer).addOnSuccessListener {
                         Toast.makeText(this@MainActivity, "Saved", Toast.LENGTH_SHORT).show()
