@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "760768421678",
+    "firebase_url": "https://tommaddenfyp-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "tommaddenfyp",
+    "storage_bucket": "tommaddenfyp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760768421678:android:4429b4246b037736b5e4bf",
+        "android_client_info": {
+          "package_name": "com.example.fyp_tommadden"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760768421678-219sdohl2uikg79e5sf9f3i4e1030sde.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPYnqtAhEifqf91Oq6nFNxKy72O62zUNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "760768421678-219sdohl2uikg79e5sf9f3i4e1030sde.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
