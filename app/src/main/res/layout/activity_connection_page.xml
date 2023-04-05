@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterPage">
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/colorPrimaryVariant"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,16 +24,38 @@
             android:text="Connect Bluetooth "
             android:textSize="25dp"
             android:textStyle="bold"/>
+        <ImageButton
+            android:id="@+id/homeButton"
+            android:layout_width="50dp"
+            android:layout_height="54dp"
+
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.865"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/baseline_home_24" />
+
+
     </androidx.appcompat.widget.Toolbar>
+
     <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="110dp"
-        android:layout_height="101dp"
-        android:layout_marginBottom="44dp"
+        android:id="@+id/scanButton"
+        android:layout_width="153dp"
+        android:layout_height="209dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="467dp"
+        android:background="@color/white"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.865"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/disconnectble" />
-</RelativeLayout>
+        app:srcCompat="@drawable/baseline_bluetooth_searching_24" />
+
+    <ListView
+        android:id="@+id/deviceListView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+</LinearLayout>
