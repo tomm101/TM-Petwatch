@@ -62,7 +62,7 @@ class DailySessions : AppCompatActivity() {
     }
     // Custom X-axis value formatter to format the dates
     inner class MyXAxisValueFormatter : ValueFormatter() {
-        private val mFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        private val mFormat = SimpleDateFormat("dd/MM", Locale.getDefault())
 
         override fun getFormattedValue(value: Float): String {
             return mFormat.format(Date(value.toLong()))
