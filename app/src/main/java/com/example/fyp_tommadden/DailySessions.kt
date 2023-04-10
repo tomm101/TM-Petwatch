@@ -15,6 +15,9 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.absoluteValue
+import kotlin.math.min
+import kotlin.time.Duration.Companion.seconds
 
 class DailySessions : AppCompatActivity() {
 
@@ -52,11 +55,12 @@ class DailySessions : AppCompatActivity() {
                 dataSet.mode = LineDataSet.Mode.LINEAR
                 dataSet.setDrawHighlightIndicators(false)
                 val data = LineData(dataSet)
+               // chartView.xAxis.granularity = 1F
                 chartView.data = data
                 chartView.description.text = "Activity Sessions"
                 chartView.xAxis.valueFormatter =MyXAxisValueFormatter()
-                chartView.axisLeft.valueFormatter = MyYAxisValueFormatter()
-                chartView.axisRight.valueFormatter = MyYAxisValueFormatter()
+//                chartView.axisLeft.valueFormatter = MyYAxisValueFormatter()
+//                chartView.axisRight.valueFormatter = MyYAxisValueFormatter()
 
                 // Step 7: Bind the chart view to the data
                // chartView.axisLeft.axisMinimum = 0f
@@ -90,16 +94,15 @@ class DailySessions : AppCompatActivity() {
             }
         }
     }
-    inner class MyYAxisValueFormatter : ValueFormatter() {
-
-        override fun getFormattedValue(value: Float): String {
-            val incrementedValue = value + 1
-            // Limit the maximum value to 10
-            val formattedValue = if (incrementedValue <= 10) incrementedValue.toString() else ""
-            return formattedValue
-//            return finalTimer
-        }
-    }
+//    inner class MyYAxisValueFormatter : ValueFormatter() {
+//
+//        override fun getFormattedValue(value: Float): String {
+//            val parsed = min(value.toLong(), 600)
+//            // Limit the maximum value to 10
+//            return parsed.absoluteValue.toString()
+////            return finalTimer
+//        }
+//    }
 
 
 }
