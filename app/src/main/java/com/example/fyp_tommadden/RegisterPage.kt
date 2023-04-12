@@ -49,8 +49,8 @@ class RegisterPage : AppCompatActivity() {
                 }
 
             db = FirebaseDatabase.getInstance().getReference("User")
-            val user = User(firstName,lastName,PhoneNo,Email,Password) // pass data to the user class
-            db.child(Email).setValue(user).addOnSuccessListener {
+            val user = User(firstName,lastName,PhoneNo) // pass data to the user class
+            db.child(PhoneNo).setValue(user).addOnSuccessListener {
                 binding.Fname.text.clear()
                 binding.Lname.text.clear()
                 binding.PhoneNo.text.clear()

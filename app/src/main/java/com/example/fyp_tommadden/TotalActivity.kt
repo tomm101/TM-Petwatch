@@ -1,49 +1,70 @@
 package com.example.fyp_tommadden
 
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
 import android.os.Bundle
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import androidx.appcompat.app.AppCompatActivity
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.google.firebase.database.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class TotalActivity : AppCompatActivity() {
+
+    private lateinit var barChart: BarChart
+    private lateinit var databaseReference: DatabaseReference
+
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_total)
-//
-//
-//        // Create a Firebase database reference
-//        val databaseReference = FirebaseDatabase.getInstance().reference.child("Timer")
-//
-//// Add a listener to retrieve data
-//        databaseReference.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                // Create a HashMap to store the sum of values associated with each date
-//                val dateValueMap = HashMap<String, Int>()
-//
-//                // Iterate through the snapshot to calculate the sum of values for each date
-//                for (childSnapshot in snapshot.children) {
-//                    val timer = childSnapshot.getValue(Timer::class.java)
-//                    timer?.let {
-//                        val currentDate = it.currentDate
-//                        val value = it.value
-//                        if (dateValueMap.containsKey(currentDate)) {
-//                            dateValueMap[currentDate] = dateValueMap[currentDate]!! + value
-//                        } else {
-//                            dateValueMap[currentDate] = value
-//                        }
-//                    }
-//                }
-//
-//                // Call a function to display the data in a table
-//                displayDataInTable(dateValueMap)
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                // Handle error, if any
-//            }
-//        })
-//
-   }
+
+        barChart = findViewById(R.id.barChart)
+
+        // Get today's date
+        val currentDate = SimpleDateFormat("dd/MM/yyyy").format(Date())
+
+        // Initialize Firebase database
+        val database = FirebaseDatabase.getInstance()
+        databaseReference = database.getReference("Timer")
+
+        // Query the database to get data for today's date
+        val query = databaseReference.orderByChild("currentDate").equalTo(currentDate)
+        query.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Create an ArrayList to store bar chart entries
+                val entries: ArrayList<BarEntry> = ArrayList()
+
+                // Loop through the dataSnapshot to parse the data and add it to entries
+                for (snapshot in dataSnapshot.children) {
+                    val value = snapshot.child("FinalTimer").getValue(Long::class.java)
+                    // Add the value to entries
+                    if (value != null) {
+                        entries.add(BarEntry(entries.size.toFloat(), value.toFloat()))
+                    }
+                }
+
+                // Create a BarDataSet from the entries
+                val dataSet = BarDataSet(entries, "Data Label")
+                dataSet.color = getColor(R.color.LightBlue)
+
+                // Create a BarData object from the dataSet
+                val barData = BarData(dataSet)
+
+                // Set the data to the bar chart
+                barChart.data = barData
+
+                // Refresh the chart
+                barChart.invalidate()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle database error here
+            }
+        })
+    }
 }
+

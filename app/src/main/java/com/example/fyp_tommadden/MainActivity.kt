@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                     timerResult = SystemClock.elapsedRealtime() - timer.base
                     val seconds = timerResult / 1000
                     val finalTimer = "%02d:%02d".format(seconds / 60, seconds % 60)
-                    val currentDate = Calendar.getInstance().time
+                    val currentDate = Calendar.getInstance().timeInMillis
 
                     val Date = currentDate.toString()
                    // timerResult = System.currentTimeMillis()
