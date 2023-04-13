@@ -5,14 +5,14 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 
-
+import com.twilio.Twilio
 import android.view.View
 import android.widget.*
-import androidx.appcompat.widget.Toolbar
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 
@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var abcImageButton: ImageButton
     lateinit var petButton: ImageButton
     private lateinit var db: DatabaseReference
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -52,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         val startbtn = findViewById<Button>(R.id.start)
         startbtn?.setOnClickListener(object : View.OnClickListener {
 
-           // var isWorking = false
+            // var isWorking = false
             var timerResult: Long = 0
 
 
@@ -63,34 +65,38 @@ class MainActivity : AppCompatActivity() {
                     timerRunning = true
                     startbtn.setText(R.string.stop)
                     Toast.makeText(this@MainActivity, R.string.working, Toast.LENGTH_SHORT).show()
-                }
-
-                else {
+                } else {
                     timer.stop()
                     timerResult = SystemClock.elapsedRealtime() - timer.base
                     val seconds = timerResult / 1000
                     val finalTimer = "%02d:%02d".format(seconds / 60, seconds % 60)
-                    val currentDate = Calendar.getInstance().timeInMillis
+                    //val currentDate = Calendar.getInstance().timeInMillis
 
-                    val Date = currentDate.toString()
-                   // timerResult = System.currentTimeMillis()
-                    //timer.base = SystemClock.elapsedRealtime() // Reset the timer to 0
                     timerRunning = false
                     startbtn.setText(R.string.start)
                     textView?.text = finalTimer.toString()
                     Toast.makeText(this@MainActivity, R.string.stopped, Toast.LENGTH_SHORT).show()
 
                     db = FirebaseDatabase.getInstance().getReference("Timer")
-                    val timer = Timer(timerResult, Date) // pass data to the user class
+//                    val timer = Timer(timerResult, Date) // pass data to the user class
 
-                    db.child(Date).setValue(timer).addOnSuccessListener {
+                    // TODO: Do something else if user is null
+                    val user = FirebaseAuth.getInstance().currentUser?.uid // store current user id
+                        ?: throw Exception("User is not signed in. Please Sign in")
+
+                    val todayDate = LocalDate.now().toString()
+
+                    val dbEntry = db.child(user).child(todayDate).push() //current user has a child of the date
+
+                    dbEntry.setValue(timerResult).addOnSuccessListener {// the timer value is saved to this date
                         Toast.makeText(this@MainActivity, "Saved", Toast.LENGTH_SHORT).show()
                     }.addOnFailureListener {
-                        Toast.makeText(this@MainActivity, "Save Failed", Toast.LENGTH_SHORT).show()  }
+                        Toast.makeText(this@MainActivity, "Save Failed", Toast.LENGTH_SHORT).show()
+                    }.addOnCanceledListener { Log.d("Test", "Canceled") }
 
 
-
+                }
             }
-        }
-})}}
-
+        })
+    }
+}
