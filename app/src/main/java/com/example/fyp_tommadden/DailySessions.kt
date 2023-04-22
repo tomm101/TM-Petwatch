@@ -67,6 +67,8 @@ class DailySessions : AppCompatActivity() {
 //                    lastXValue = test.toInstant().epochSecond.toFloat()
                 }
 
+                System.out.println(dataList)
+
                 // Step 6: Initialize the chart view
                 val chartView = findViewById<LineChart>(R.id.chartView)
                 val dataSet = LineDataSet(dataList, "Data Set")
@@ -94,14 +96,9 @@ class DailySessions : AppCompatActivity() {
         })
     }
     inner class MyXAxisValueFormatter : ValueFormatter() {
-
-        private val dateFormatter = SimpleDateFormat("dd/MM", Locale.ENGLISH)
-
         override fun getFormattedValue(value: Float): String {
-            // Convert the value (which represents the timestamp) to a LocalDate
-            val date = LocalDate.ofEpochDay(value.toLong() / (24 * 60 * 60 * 1000))
-            // Format the LocalDate to a string using the desired date format
-            return dateFormatter.format(date)
+            val simpleDateFormat = SimpleDateFormat("dd/MM", Locale.ENGLISH)
+            return simpleDateFormat.format(value)
         }
     }
 

@@ -1,20 +1,18 @@
 package com.example.fyp_tommadden
 
-import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.SystemClock
+import android.telephony.SmsManager
 import android.util.Log
-
-import com.twilio.Twilio
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import java.time.LocalDate
-import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var abcImageButton: ImageButton
