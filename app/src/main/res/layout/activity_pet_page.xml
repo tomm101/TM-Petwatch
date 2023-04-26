@@ -63,7 +63,7 @@
                         android:layout_marginTop="30dp"
                         android:fontFamily="sans-serif"
                         android:text="Activity Sessions"
-                        android:textSize="30dp"
+                        android:textSize="26dp"
                         android:textStyle="bold" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -92,7 +92,7 @@
                     android:layout_marginTop="30dp"
                     android:fontFamily="sans-serif"
                     android:text="Daily Total Activity"
-                    android:textSize="28dp"
+                    android:textSize="26dp"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

@@ -15,6 +15,7 @@ class TotalActivity : AppCompatActivity() {
 
     // Define the Firebase database reference
     private val mDatabase = FirebaseDatabase.getInstance()
+    private lateinit var dates: List<String>
 
     // Define the BarChart
     private lateinit var mBarChart: BarChart
@@ -29,41 +30,31 @@ class TotalActivity : AppCompatActivity() {
         // Set up the BarChart
         mBarChart = findViewById(R.id.barChart) // Replace with the ID of your BarChart view
 
-        // Set up the Firebase database reference with a query for today's date
-        val query: Query =
-            mDatabase.getReference("Timer").child("user")
-                .orderByChild("currentDate").equalTo(mCurrentDate)
+
+        val query: Query = mDatabase.getReference("Timer").child("3CsRkX71KbdQcgQwMHAOFg5fwiB2").child(mCurrentDate)
+
 
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Create an ArrayList to store the bar chart entries
-                val barEntries = ArrayList<BarEntry>()
+                val values = ArrayList<BarEntry>()
 
-                // Loop through each child snapshot (each entry for today's date)
-                for (childSnapshot in dataSnapshot.children) {
-                    // Retrieve the value as a float
-                    val value =
-                        childSnapshot.child("finalTimer").getValue(Float::class.java)
+                for (dateSnapshot in dataSnapshot.children) {
+                    val value = dateSnapshot.getValue(Float::class.java) ?: 0f
+                    values.add(BarEntry(values.size.toFloat(), value))
+                }
+                System.out.println(values)
+                val dataSet = BarDataSet(values, "Values")
+                val barData = BarData(dataSet)
 
-                    // Get the x-value as the index of the child snapshot (0, 1, 2, ...)
-                    val xValue = dataSnapshot.children.indexOf(childSnapshot).toFloat()
+                mBarChart.data = barData
+                mBarChart.invalidate()
 
-                    // Create a BarEntry with the x-value and the y-value
-                    value?.let { barEntries.add(BarEntry(xValue, it)) }
+               // dates = ((dataSnapshot.value as HashMap<*, *>).keys).toList() as List<String>
+
                 }
 
-                // Create a BarDataSet with the retrieved bar entries
-                val barDataSet = BarDataSet(barEntries, "Data for $mCurrentDate")
 
-                // Create a BarData object with the barDataSet
-                val barData = BarData(barDataSet)
 
-                // Set the data to the BarChart
-                mBarChart.data = barData
-
-                // Update the chart
-                mBarChart.invalidate()
-            }
 
             override fun onCancelled(databaseError: DatabaseError) {
                 // Handle any errors that may occur

@@ -23,9 +23,7 @@ class RegisterPage : AppCompatActivity() {
         fAuth = FirebaseAuth.getInstance();
         binding = ActivityRegisterPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        // reference to button
-        //val regbutton = findViewById<View>(R.id.Registerbtn) as Button
-//
+
 
         binding.Registerbtn.setOnClickListener {
             val firstName = binding.Fname.text.toString()
@@ -37,12 +35,13 @@ class RegisterPage : AppCompatActivity() {
             fAuth.createUserWithEmailAndPassword(Email, Password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                       // val user = fAuth.currentUser
+
                         Toast.makeText(baseContext, "Registration Successful.",
                             Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, LoginPage::class.java)
+                        startActivity(intent)
                     } else {
-                        // If sign in fails, display a message to the user.
+                        // If register in fails, display a message to the user.
                         Toast.makeText(baseContext, "Registration Unsuccessful",
                             Toast.LENGTH_SHORT).show()
                     }

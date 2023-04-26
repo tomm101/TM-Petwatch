@@ -28,7 +28,6 @@
             android:id="@+id/homeButton"
             android:layout_width="50dp"
             android:layout_height="54dp"
-
             android:background="@color/white"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -54,8 +53,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/baseline_bluetooth_searching_24" />
 
-    <ListView
-        android:id="@+id/deviceListView"
-        android:layout_width="match_parent"
-        android:layout_height="150dp" />
+    <TextView
+        android:id="@+id/BLEdevice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!--Paired devices mac ID-->
+    <TextView
+        android:id="@+id/BleMac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/BLEdevice" />
 </LinearLayout>
