@@ -21,7 +21,7 @@ class TotalActivity : AppCompatActivity() {
     private lateinit var mBarChart: BarChart
 
     // Get the current date
-    private val mCurrentDate = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date())
+    private val mCurrentDate = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date()).toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +38,8 @@ class TotalActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val values = ArrayList<BarEntry>()
 
-                for (dateSnapshot in dataSnapshot.children) {
-                    val value = dateSnapshot.getValue(Float::class.java) ?: 0f
+                for (date in dataSnapshot.children) {
+                    val value = date.getValue(Float::class.java) ?: 0f
                     values.add(BarEntry(values.size.toFloat(), value))
                 }
                 System.out.println(values)
@@ -52,9 +52,6 @@ class TotalActivity : AppCompatActivity() {
                // dates = ((dataSnapshot.value as HashMap<*, *>).keys).toList() as List<String>
 
                 }
-
-
-
 
             override fun onCancelled(databaseError: DatabaseError) {
                 // Handle any errors that may occur

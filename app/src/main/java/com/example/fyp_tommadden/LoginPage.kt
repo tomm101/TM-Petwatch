@@ -38,7 +38,7 @@ class LoginPage : AppCompatActivity() {
                         // Sign in success, update UI with the signed-in user's information
 
                     } else {
-                        Toast.makeText(baseContext, "Login failed.",
+                        Toast.makeText(baseContext, "Please try again or Register an account",
                             Toast.LENGTH_SHORT).show()
                     }
                 }
